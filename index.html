@@ -361,7 +361,6 @@ footer{
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -532,191 +531,6 @@ My Dashboard
 <p>Jobs Available</p>
 
 </div>
-
-</div>
-
-
-<div class="panel">
-
-<h2>My Profile and CV</h2>
-
-<br>
-
-<form id="profileForm">
-
-<details open>
-<summary>Personal Information</summary>
-<div class="form-grid">
-<div class="form-group"><label>First Name</label><input id="profileFirstName" required></div>
-<div class="form-group"><label>Middle Name</label><input id="profileMiddleName"></div>
-<div class="form-group"><label>Surname</label><input id="profileSurname" required></div>
-<div class="form-group"><label>ID Number</label><input id="profileIdNumber"></div>
-<div class="form-group"><label>Date of Birth</label><input type="date" id="profileDateOfBirth"></div>
-<div class="form-group"><label>Gender</label><input id="profileGender"></div>
-<div class="form-group"><label>Nationality</label><input id="profileNationality"></div>
-<div class="form-group"><label>Race (Optional)</label><input id="profileRace"></div>
-<div class="form-group"><label>Marital Status</label><input id="profileMaritalStatus"></div>
-<div class="form-group"><label>Province</label><input id="profileProvince"></div>
-<div class="form-group"><label>City/Town</label><input id="profileCity"></div>
-<div class="form-group full"><label>Residential Address</label><textarea id="profileAddress"></textarea></div>
-<div class="form-group"><label>Phone Number</label><input id="profilePhone"></div>
-<div class="form-group"><label>Alternative Phone Number</label><input id="profileAlternativePhone"></div>
-<div class="form-group"><label>Email Address</label><input type="email" id="profileEmail" readonly></div>
-<div class="form-group"><label>Profile Picture</label><input type="file" id="profilePicture" accept="image/*"></div>
-</div>
-</details>
-
-<details>
-<summary>Employment Details</summary>
-<div class="form-grid">
-<div class="form-group"><label>Professional Title</label><input id="profileTitle"></div>
-<div class="form-group"><label>Employment Status</label><input id="profileEmploymentStatus"></div>
-<div class="form-group"><label>Notice Period</label><input id="profileNoticePeriod"></div>
-<div class="form-group"><label>Expected Salary (ZAR)</label><input id="profileExpectedSalary"></div>
-<div class="form-group"><label>Willing to Relocate</label><select id="profileRelocate"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-<div class="form-group"><label>Willing to Travel</label><select id="profileTravel"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-<div class="form-group"><label>Driver's Licence</label><input id="profileDriversLicence"></div>
-<div class="form-group"><label>Own Vehicle</label><select id="profileOwnVehicle"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-</div>
-</details>
-
-<details>
-<summary>Professional Summary</summary>
-<div class="form-group"><label>Professional Summary</label><textarea id="profileSummary"></textarea></div>
-</details>
-
-<details>
-<summary>Education</summary>
-<div class="form-grid">
-<div class="form-group"><label>Institution Name</label><input id="profileInstitution"></div>
-<div class="form-group"><label>Qualification</label><input id="profileQualification"></div>
-<div class="form-group"><label>Field of Study</label><input id="profileFieldOfStudy"></div>
-<div class="form-group"><label>NQF Level</label><input id="profileNqfLevel"></div>
-<div class="form-group"><label>Start Date</label><input type="date" id="profileEducationStart"></div>
-<div class="form-group"><label>End Date</label><input type="date" id="profileEducationEnd"></div>
-<div class="form-group"><label>Current Student</label><select id="profileCurrentStudent"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-<div class="form-group full"><label>Major Subjects</label><textarea id="profileMajorSubjects"></textarea></div>
-<div class="form-group full"><label>Achievements</label><textarea id="profileEducationAchievements"></textarea></div>
-</div>
-</details>
-
-<details>
-<summary>Matric Information</summary>
-<div class="form-grid">
-<div class="form-group"><label>High School Name</label><input id="profileHighSchool"></div>
-<div class="form-group"><label>Year Completed</label><input id="profileMatricYear"></div>
-<div class="form-group full"><label>NSC/Matric Results</label><textarea id="profileMatricResults"></textarea></div>
-</div>
-</details>
-
-<details>
-<summary>Work Experience</summary>
-<div class="form-grid">
-<div class="form-group"><label>Company Name</label><input id="profileCompany"></div>
-<div class="form-group"><label>Job Title</label><input id="profileJobTitle"></div>
-<div class="form-group"><label>Employment Type</label><input id="profileWorkType"></div>
-<div class="form-group"><label>Start Date</label><input type="date" id="profileWorkStart"></div>
-<div class="form-group"><label>End Date</label><input type="date" id="profileWorkEnd"></div>
-<div class="form-group"><label>Current Position</label><select id="profileCurrentPosition"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-<div class="form-group full"><label>Job Responsibilities</label><textarea id="profileResponsibilities"></textarea></div>
-<div class="form-group full"><label>Achievements</label><textarea id="profileWorkAchievements"></textarea></div>
-<div class="form-group full"><label>Reason for Leaving</label><textarea id="profileReasonLeaving"></textarea></div>
-</div>
-</details>
-
-<details>
-<summary>Skills, Certifications and Projects</summary>
-<div class="form-grid">
-<div class="form-group full"><label>Technical Skills</label><textarea id="profileTechnicalSkills"></textarea></div>
-<div class="form-group full"><label>Computer Skills</label><textarea id="profileComputerSkills"></textarea></div>
-<div class="form-group full"><label>Soft Skills</label><textarea id="profileSoftSkills"></textarea></div>
-<div class="form-group full"><label>Languages Spoken</label><textarea id="profileLanguages"></textarea></div>
-<div class="form-group"><label>Certificate Name</label><input id="profileCertificate"></div>
-<div class="form-group"><label>Training Provider</label><input id="profileTrainingProvider"></div>
-<div class="form-group"><label>Date Obtained</label><input type="date" id="profileCertificateDate"></div>
-<div class="form-group"><label>Expiry Date</label><input type="date" id="profileCertificateExpiry"></div>
-<div class="form-group"><label>Project Name</label><input id="profileProject"></div>
-<div class="form-group"><label>Project Link</label><input type="url" id="profileProjectLink"></div>
-<div class="form-group full"><label>Project Description</label><textarea id="profileProjectDescription"></textarea></div>
-<div class="form-group full"><label>Skills Used</label><textarea id="profileProjectSkills"></textarea></div>
-</div>
-</details>
-
-<details>
-<summary>References and Additional Information</summary>
-<div class="form-grid">
-<div class="form-group"><label>Reference Name</label><input id="profileReferenceName"></div>
-<div class="form-group"><label>Company</label><input id="profileReferenceCompany"></div>
-<div class="form-group"><label>Job Title</label><input id="profileReferenceTitle"></div>
-<div class="form-group"><label>Relationship</label><input id="profileReferenceRelationship"></div>
-<div class="form-group"><label>Contact Number</label><input id="profileReferencePhone"></div>
-<div class="form-group"><label>Email Address</label><input type="email" id="profileReferenceEmail"></div>
-<div class="form-group"><label>South African Citizen</label><select id="profileCitizen"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
-<div class="form-group"><label>Work Permit/Visa Status</label><input id="profileVisaStatus"></div>
-<div class="form-group"><label>Criminal Record</label><select id="profileCriminalRecord"><option value="">Select</option><option>No</option><option>Yes</option></select></div>
-<div class="form-group"><label>Highest Qualification</label><input id="profileHighestQualification"></div>
-<div class="form-group"><label>Availability Date</label><input type="date" id="profileAvailabilityDate"></div>
-<div class="form-group"><label>LinkedIn Profile</label><input type="url" id="profileLinkedin"></div>
-<div class="form-group"><label>GitHub Profile</label><input type="url" id="profileGithub"></div>
-<div class="form-group"><label>Portfolio Website</label><input type="url" id="profilePortfolio"></div>
-</div>
-</details>
-
-<details>
-<summary>Attachments</summary>
-<div class="form-grid">
-<div class="form-group"><label>Upload CV</label><input type="file" id="profileCv" accept=".pdf,.doc,.docx"></div>
-<div class="form-group"><label>Upload Cover Letter</label><input type="file" id="profileCoverLetter" accept=".pdf,.doc,.docx"></div>
-<div class="form-group"><label>Upload Certificates</label><input type="file" id="profileCertificates" multiple accept=".pdf,.jpg,.jpeg,.png"></div>
-<div class="form-group"><label>Upload Academic Transcript</label><input type="file" id="profileTranscript" accept=".pdf,.jpg,.jpeg,.png"></div>
-</div>
-</details>
-
-<button
-type="submit"
-class="btn blue">
-
-Save Profile
-
-</button>
-
-<button
-type="button"
-class="btn"
-onclick="downloadCV()">
-
-Download CV (PDF)
-
-</button>
-
-<button
-type="button"
-class="btn"
-onclick="previewCV()">
-
-Preview CV
-
-</button>
-
-<button
-type="button"
-class="btn"
-onclick="printCV()">
-
-Print CV
-
-</button>
-
-<button
-type="button"
-class="btn"
-onclick="shareCV()">
-
-Share CV
-
-</button>
-
-</form>
 
 </div>
 
@@ -1308,8 +1122,7 @@ return values;
 }
 
 
-document.getElementById("profileForm")
-.addEventListener("submit",async function(e){
+document.getElementById("profileForm")?.addEventListener("submit",async function(e){
 
 e.preventDefault();
 
@@ -1604,7 +1417,6 @@ document.getElementById("dashboardSection")
 .style.display="block";
 
 updateDashboard();
-loadProfile();
 
 }
 
@@ -1635,6 +1447,10 @@ ${escapeHTML(job.company)}
 
 <p class="info">
 💰 ${escapeHTML(job.salary || "Salary not specified")}
+</p>
+
+<p class="info">
+${escapeHTML(job.description || "No description provided.")}
 </p>
 
 <span class="tag">
