@@ -791,6 +791,12 @@ Login
 </form>
 
 <div class="switch">
+<a onclick="openForgotPassword()">
+Forgot password?
+</a>
+</div>
+
+<div class="switch">
 
 Don't have an account?
 
@@ -799,6 +805,70 @@ Sign Up
 </a>
 
 </div>
+
+</div>
+
+</div>
+
+
+<!-- FORGOT PASSWORD -->
+
+<div class="modal" id="forgotPasswordModal">
+
+<div class="modal-box">
+
+<span class="close"
+onclick="closeModals()">×</span>
+
+<h2>Reset Password</h2>
+
+<form id="forgotPasswordForm">
+
+<input
+type="email"
+id="forgotPasswordEmail"
+placeholder="Email"
+required>
+
+<button class="btn blue">
+Send Reset Link
+</button>
+
+</form>
+
+<div class="switch">
+<a onclick="openLogin()">
+Back to Login
+</a>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RESET PASSWORD -->
+
+<div class="modal" id="resetPasswordModal">
+
+<div class="modal-box">
+
+<h2>Choose a New Password</h2>
+
+<form id="resetPasswordForm">
+
+<input
+type="password"
+id="newPassword"
+placeholder="New password"
+minlength="6"
+required>
+
+<button class="btn blue">
+Update Password
+</button>
+
+</form>
 
 </div>
 
@@ -965,6 +1035,18 @@ isAdmin = session?.user?.email === "sescilo@icloud.com";
 
 if(isAdmin){
 currentUser = "admin";
+}else if(session?.user?.email){
+currentUser = session.user.email;
+
+if(!users.some(user => user.email===currentUser)){
+users.push({
+name:session.user.user_metadata?.name || currentUser,
+email:currentUser,
+saved:[],
+applications:[]
+});
+saveUsers();
+}
 }
 
 updateNav();
@@ -1387,7 +1469,7 @@ updateDashboard();
    ===================================== */
 
 document.getElementById("signupForm")
-.addEventListener("submit",function(e){
+.addEventListener("submit",async function(e){
 
 e.preventDefault();
 
@@ -1401,53 +1483,29 @@ document.getElementById("signupEmail")
 .value.trim()
 .toLowerCase();
 
-let password =
-document.getElementById("signupPassword")
-.value;
-
-
-if(password.length<6){
-
-alert(
-"Password must be at least 6 characters."
-);
-
-return;
-
-}
-
-
-if(
-users.some(u =>
-u.email===email
-)
-){
-
-alert(
-"An account with this email already exists."
-);
-
-return;
-
-}
-
-
-users.push({
-
-name:name,
-
+let result =
+await supabaseClient.auth.signUp({
 email:email,
-
-password:password,
-
-saved:[],
-
-applications:[]
-
+password:document.getElementById("signupPassword").value,
+options:{
+data:{name:name}
+}
 });
 
+if(result.error){
+alert(result.error.message);
+return;
+}
 
+if(!users.some(u => u.email===email)){
+users.push({
+name:name,
+email:email,
+saved:[],
+applications:[]
+});
 saveUsers();
+}
 
 alert(
 "Account created successfully."
@@ -1465,7 +1523,7 @@ openLogin();
    ===================================== */
 
 document.getElementById("loginForm")
-.addEventListener("submit",function(e){
+.addEventListener("submit",async function(e){
 
 e.preventDefault();
 
@@ -1475,26 +1533,15 @@ document.getElementById("loginEmail")
 .value.trim()
 .toLowerCase();
 
-let password =
-document.getElementById("loginPassword")
-.value;
+let result =
+await supabaseClient.auth.signInWithPassword({
+email:email,
+password:document.getElementById("loginPassword").value
+});
 
-
-let user =
-users.find(u =>
-u.email===email &&
-u.password===password
-);
-
-
-if(!user){
-
-alert(
-"Incorrect email or password."
-);
-
+if(result.error){
+alert("Incorrect email or password.");
 return;
-
 }
 
 
@@ -1511,6 +1558,58 @@ closeModals();
 updateNav();
 
 showDashboard();
+
+});
+
+
+/* PASSWORD RECOVERY */
+
+document.getElementById("forgotPasswordForm")
+.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+let email =
+document.getElementById("forgotPasswordEmail")
+.value.trim()
+.toLowerCase();
+
+let result =
+await supabaseClient.auth.resetPasswordForEmail(
+email,
+{
+redirectTo:window.location.origin + window.location.pathname
+}
+);
+
+if(result.error){
+alert(result.error.message);
+return;
+}
+
+closeModals();
+alert("Check your email for a password reset link.");
+
+});
+
+
+document.getElementById("resetPasswordForm")
+.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+let result =
+await supabaseClient.auth.updateUser({
+password:document.getElementById("newPassword").value
+});
+
+if(result.error){
+alert(result.error.message);
+return;
+}
+
+closeModals();
+alert("Your password has been updated.");
 
 });
 
@@ -2003,6 +2102,26 @@ document.getElementById("signupModal")
 }
 
 
+function openForgotPassword(){
+
+closeModals();
+
+document.getElementById("forgotPasswordModal")
+.style.display="flex";
+
+}
+
+
+function openResetPassword(){
+
+closeModals();
+
+document.getElementById("resetPasswordModal")
+.style.display="flex";
+
+}
+
+
 function openAdminLogin(){
 
 closeModals();
@@ -2034,6 +2153,12 @@ document.getElementById("signupModal")
 .style.display="none";
 
 document.getElementById("adminModal")
+.style.display="none";
+
+document.getElementById("forgotPasswordModal")
+.style.display="none";
+
+document.getElementById("resetPasswordModal")
 .style.display="none";
 
 }
@@ -2068,6 +2193,10 @@ alert("Could not connect to the website server.");
 });
 
 checkAdminSession();
+
+if(window.location.hash.includes("type=recovery")){
+openResetPassword();
+}
 
 </script>
 
