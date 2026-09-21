@@ -543,90 +543,133 @@ My Dashboard
 
 <form id="profileForm">
 
+<details open>
+<summary>Personal Information</summary>
 <div class="form-grid">
-
-<div class="form-group">
-
-<label>Full Name</label>
-
-<input
-id="profileName"
-required
-placeholder="Your full name">
-
+<div class="form-group"><label>First Name</label><input id="profileFirstName" required></div>
+<div class="form-group"><label>Middle Name</label><input id="profileMiddleName"></div>
+<div class="form-group"><label>Surname</label><input id="profileSurname" required></div>
+<div class="form-group"><label>ID Number</label><input id="profileIdNumber"></div>
+<div class="form-group"><label>Date of Birth</label><input type="date" id="profileDateOfBirth"></div>
+<div class="form-group"><label>Gender</label><input id="profileGender"></div>
+<div class="form-group"><label>Nationality</label><input id="profileNationality"></div>
+<div class="form-group"><label>Race (Optional)</label><input id="profileRace"></div>
+<div class="form-group"><label>Marital Status</label><input id="profileMaritalStatus"></div>
+<div class="form-group"><label>Province</label><input id="profileProvince"></div>
+<div class="form-group"><label>City/Town</label><input id="profileCity"></div>
+<div class="form-group full"><label>Residential Address</label><textarea id="profileAddress"></textarea></div>
+<div class="form-group"><label>Phone Number</label><input id="profilePhone"></div>
+<div class="form-group"><label>Alternative Phone Number</label><input id="profileAlternativePhone"></div>
+<div class="form-group"><label>Email Address</label><input type="email" id="profileEmail" readonly></div>
+<div class="form-group"><label>Profile Picture</label><input type="file" id="profilePicture" accept="image/*"></div>
 </div>
+</details>
 
-<div class="form-group">
-
-<label>Phone</label>
-
-<input
-id="profilePhone"
-placeholder="Your phone number">
-
+<details>
+<summary>Employment Details</summary>
+<div class="form-grid">
+<div class="form-group"><label>Professional Title</label><input id="profileTitle"></div>
+<div class="form-group"><label>Employment Status</label><input id="profileEmploymentStatus"></div>
+<div class="form-group"><label>Notice Period</label><input id="profileNoticePeriod"></div>
+<div class="form-group"><label>Expected Salary (ZAR)</label><input id="profileExpectedSalary"></div>
+<div class="form-group"><label>Willing to Relocate</label><select id="profileRelocate"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+<div class="form-group"><label>Willing to Travel</label><select id="profileTravel"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+<div class="form-group"><label>Driver's Licence</label><input id="profileDriversLicence"></div>
+<div class="form-group"><label>Own Vehicle</label><select id="profileOwnVehicle"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
 </div>
+</details>
 
-<div class="form-group">
+<details>
+<summary>Professional Summary</summary>
+<div class="form-group"><label>Professional Summary</label><textarea id="profileSummary"></textarea></div>
+</details>
 
-<label>Location</label>
-
-<input
-id="profileLocation"
-placeholder="City, Province">
-
+<details>
+<summary>Education</summary>
+<div class="form-grid">
+<div class="form-group"><label>Institution Name</label><input id="profileInstitution"></div>
+<div class="form-group"><label>Qualification</label><input id="profileQualification"></div>
+<div class="form-group"><label>Field of Study</label><input id="profileFieldOfStudy"></div>
+<div class="form-group"><label>NQF Level</label><input id="profileNqfLevel"></div>
+<div class="form-group"><label>Start Date</label><input type="date" id="profileEducationStart"></div>
+<div class="form-group"><label>End Date</label><input type="date" id="profileEducationEnd"></div>
+<div class="form-group"><label>Current Student</label><select id="profileCurrentStudent"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+<div class="form-group full"><label>Major Subjects</label><textarea id="profileMajorSubjects"></textarea></div>
+<div class="form-group full"><label>Achievements</label><textarea id="profileEducationAchievements"></textarea></div>
 </div>
+</details>
 
-<div class="form-group">
-
-<label>Professional Title</label>
-
-<input
-id="profileTitle"
-placeholder="e.g. Junior Web Developer">
-
+<details>
+<summary>Matric Information</summary>
+<div class="form-grid">
+<div class="form-group"><label>High School Name</label><input id="profileHighSchool"></div>
+<div class="form-group"><label>Year Completed</label><input id="profileMatricYear"></div>
+<div class="form-group full"><label>NSC/Matric Results</label><textarea id="profileMatricResults"></textarea></div>
 </div>
+</details>
 
-<div class="form-group full">
-
-<label>Professional Summary</label>
-
-<textarea
-id="profileSummary"
-placeholder="Briefly describe your experience and career goals"></textarea>
-
+<details>
+<summary>Work Experience</summary>
+<div class="form-grid">
+<div class="form-group"><label>Company Name</label><input id="profileCompany"></div>
+<div class="form-group"><label>Job Title</label><input id="profileJobTitle"></div>
+<div class="form-group"><label>Employment Type</label><input id="profileWorkType"></div>
+<div class="form-group"><label>Start Date</label><input type="date" id="profileWorkStart"></div>
+<div class="form-group"><label>End Date</label><input type="date" id="profileWorkEnd"></div>
+<div class="form-group"><label>Current Position</label><select id="profileCurrentPosition"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+<div class="form-group full"><label>Job Responsibilities</label><textarea id="profileResponsibilities"></textarea></div>
+<div class="form-group full"><label>Achievements</label><textarea id="profileWorkAchievements"></textarea></div>
+<div class="form-group full"><label>Reason for Leaving</label><textarea id="profileReasonLeaving"></textarea></div>
 </div>
+</details>
 
-<div class="form-group full">
-
-<label>Skills</label>
-
-<textarea
-id="profileSkills"
-placeholder="e.g. HTML, customer service, Microsoft Office"></textarea>
-
+<details>
+<summary>Skills, Certifications and Projects</summary>
+<div class="form-grid">
+<div class="form-group full"><label>Technical Skills</label><textarea id="profileTechnicalSkills"></textarea></div>
+<div class="form-group full"><label>Computer Skills</label><textarea id="profileComputerSkills"></textarea></div>
+<div class="form-group full"><label>Soft Skills</label><textarea id="profileSoftSkills"></textarea></div>
+<div class="form-group full"><label>Languages Spoken</label><textarea id="profileLanguages"></textarea></div>
+<div class="form-group"><label>Certificate Name</label><input id="profileCertificate"></div>
+<div class="form-group"><label>Training Provider</label><input id="profileTrainingProvider"></div>
+<div class="form-group"><label>Date Obtained</label><input type="date" id="profileCertificateDate"></div>
+<div class="form-group"><label>Expiry Date</label><input type="date" id="profileCertificateExpiry"></div>
+<div class="form-group"><label>Project Name</label><input id="profileProject"></div>
+<div class="form-group"><label>Project Link</label><input type="url" id="profileProjectLink"></div>
+<div class="form-group full"><label>Project Description</label><textarea id="profileProjectDescription"></textarea></div>
+<div class="form-group full"><label>Skills Used</label><textarea id="profileProjectSkills"></textarea></div>
 </div>
+</details>
 
-<div class="form-group full">
-
-<label>Education</label>
-
-<textarea
-id="profileEducation"
-placeholder="Qualifications, institutions, and years"></textarea>
-
+<details>
+<summary>References and Additional Information</summary>
+<div class="form-grid">
+<div class="form-group"><label>Reference Name</label><input id="profileReferenceName"></div>
+<div class="form-group"><label>Company</label><input id="profileReferenceCompany"></div>
+<div class="form-group"><label>Job Title</label><input id="profileReferenceTitle"></div>
+<div class="form-group"><label>Relationship</label><input id="profileReferenceRelationship"></div>
+<div class="form-group"><label>Contact Number</label><input id="profileReferencePhone"></div>
+<div class="form-group"><label>Email Address</label><input type="email" id="profileReferenceEmail"></div>
+<div class="form-group"><label>South African Citizen</label><select id="profileCitizen"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+<div class="form-group"><label>Work Permit/Visa Status</label><input id="profileVisaStatus"></div>
+<div class="form-group"><label>Criminal Record</label><select id="profileCriminalRecord"><option value="">Select</option><option>No</option><option>Yes</option></select></div>
+<div class="form-group"><label>Highest Qualification</label><input id="profileHighestQualification"></div>
+<div class="form-group"><label>Availability Date</label><input type="date" id="profileAvailabilityDate"></div>
+<div class="form-group"><label>LinkedIn Profile</label><input type="url" id="profileLinkedin"></div>
+<div class="form-group"><label>GitHub Profile</label><input type="url" id="profileGithub"></div>
+<div class="form-group"><label>Portfolio Website</label><input type="url" id="profilePortfolio"></div>
 </div>
+</details>
 
-<div class="form-group full">
-
-<label>Experience</label>
-
-<textarea
-id="profileExperience"
-placeholder="Roles, employers, responsibilities, and dates"></textarea>
-
+<details>
+<summary>Attachments</summary>
+<div class="form-grid">
+<div class="form-group"><label>Upload CV</label><input type="file" id="profileCv" accept=".pdf,.doc,.docx"></div>
+<div class="form-group"><label>Upload Cover Letter</label><input type="file" id="profileCoverLetter" accept=".pdf,.doc,.docx"></div>
+<div class="form-group"><label>Upload Certificates</label><input type="file" id="profileCertificates" multiple accept=".pdf,.jpg,.jpeg,.png"></div>
+<div class="form-group"><label>Upload Academic Transcript</label><input type="file" id="profileTranscript" accept=".pdf,.jpg,.jpeg,.png"></div>
 </div>
-
-</div>
+</details>
 
 <button
 type="submit"
@@ -641,7 +684,34 @@ type="button"
 class="btn"
 onclick="downloadCV()">
 
-Download CV
+Download CV (PDF)
+
+</button>
+
+<button
+type="button"
+class="btn"
+onclick="previewCV()">
+
+Preview CV
+
+</button>
+
+<button
+type="button"
+class="btn"
+onclick="printCV()">
+
+Print CV
+
+</button>
+
+<button
+type="button"
+class="btn"
+onclick="shareCV()">
+
+Share CV
 
 </button>
 
@@ -1209,35 +1279,30 @@ console.error(result.error);
 return;
 }
 
-let profile = result.data || {
-name:user.user_metadata?.name || "",
-email:user.email || ""
-};
+let profile = result.data || {};
 
-document.getElementById("profileName").value=profile.name || "";
-document.getElementById("profilePhone").value=profile.phone || "";
-document.getElementById("profileLocation").value=profile.location || "";
-document.getElementById("profileTitle").value=profile.title || "";
-document.getElementById("profileSummary").value=profile.summary || "";
-document.getElementById("profileSkills").value=profile.skills || "";
-document.getElementById("profileEducation").value=profile.education || "";
-document.getElementById("profileExperience").value=profile.experience || "";
+profile = result.data?.profile_data || {};
+
+profileFieldIds.forEach(function(fieldId){
+let field = document.getElementById(fieldId);
+if(field) field.value=profile[fieldId] || "";
+});
+
+document.getElementById("profileEmail").value=user.email || "";
 
 }
 
 
 function profileValues(){
 
-return {
-name:document.getElementById("profileName").value.trim(),
-phone:document.getElementById("profilePhone").value.trim(),
-location:document.getElementById("profileLocation").value.trim(),
-title:document.getElementById("profileTitle").value.trim(),
-summary:document.getElementById("profileSummary").value.trim(),
-skills:document.getElementById("profileSkills").value.trim(),
-education:document.getElementById("profileEducation").value.trim(),
-experience:document.getElementById("profileExperience").value.trim()
-};
+let values={};
+
+profileFieldIds.forEach(function(fieldId){
+let field = document.getElementById(fieldId);
+if(field) values[fieldId]=field.value.trim();
+});
+
+return values;
 
 }
 
@@ -1261,13 +1326,18 @@ return;
 
 let profile = profileValues();
 
+profile.name = [profile.profileFirstName,profile.profileMiddleName,profile.profileSurname]
+.filter(Boolean)
+.join(" ");
+
 let result =
 await supabaseClient
 .from("profiles")
 .upsert({
 user_id:user.id,
 email:user.email,
-...profile,
+name:profile.name || "",
+profile_data:profile,
 updated_at:new Date().toISOString()
 },{onConflict:"user_id"});
 
@@ -1281,49 +1351,103 @@ alert("Profile saved successfully.");
 });
 
 
+const profileFieldIds=[
+"profileFirstName","profileMiddleName","profileSurname","profileIdNumber","profileDateOfBirth","profileGender","profileNationality","profileRace","profileMaritalStatus","profileProvince","profileCity","profileAddress","profilePhone","profileAlternativePhone","profileTitle","profileEmploymentStatus","profileNoticePeriod","profileExpectedSalary","profileRelocate","profileTravel","profileDriversLicence","profileOwnVehicle","profileSummary","profileInstitution","profileQualification","profileFieldOfStudy","profileNqfLevel","profileEducationStart","profileEducationEnd","profileCurrentStudent","profileMajorSubjects","profileEducationAchievements","profileHighSchool","profileMatricYear","profileMatricResults","profileCompany","profileJobTitle","profileWorkType","profileWorkStart","profileWorkEnd","profileCurrentPosition","profileResponsibilities","profileWorkAchievements","profileReasonLeaving","profileTechnicalSkills","profileComputerSkills","profileSoftSkills","profileLanguages","profileCertificate","profileTrainingProvider","profileCertificateDate","profileCertificateExpiry","profileProject","profileProjectDescription","profileProjectSkills","profileProjectLink","profileReferenceName","profileReferenceCompany","profileReferenceTitle","profileReferenceRelationship","profileReferencePhone","profileReferenceEmail","profileCitizen","profileVisaStatus","profileCriminalRecord","profileHighestQualification","profileAvailabilityDate","profileLinkedin","profileGithub","profilePortfolio"
+];
+
+
+function cvSection(title,fields){
+
+let content=fields
+.map(function(field){
+let value=profile[field.id];
+return value ? `<div><strong>${field.label}</strong><br>${escapeHTML(value).replaceAll("\n","<br>")}</div>` : "";
+})
+.join("");
+
+return content ? `<h2>${title}</h2>${content}` : "";
+
+}
+
+
+function buildCVDocument(profile){
+
+let fullName=[profile.profileFirstName,profile.profileMiddleName,profile.profileSurname]
+.filter(Boolean)
+.join(" ");
+
+return `
+<!doctype html><html><head><title>${escapeHTML(fullName)} - CV</title>
+<style>body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:0 24px;color:#222;line-height:1.5}h1{color:#102a43;margin-bottom:4px}h2{border-bottom:2px solid #102a43;padding-bottom:4px;margin-top:26px;color:#102a43}.contact{color:#555;margin-bottom:20px}.cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cv-grid div{margin-bottom:8px}@media print{body{margin:0}}</style>
+</head><body><h1>${escapeHTML(fullName)}</h1><div class="contact">${escapeHTML(profile.profileTitle)}<br>${escapeHTML(profile.profileEmail)} | ${escapeHTML(profile.profilePhone)}<br>${escapeHTML(profile.profileCity)}, ${escapeHTML(profile.profileProvince)}</div>
+${cvSection("Professional Summary",[{id:"profileSummary",label:"Summary"}])}
+${cvSection("Employment Details",[{id:"profileEmploymentStatus",label:"Status"},{id:"profileExpectedSalary",label:"Expected Salary"},{id:"profileNoticePeriod",label:"Notice Period"}])}
+${cvSection("Education",[{id:"profileQualification",label:"Qualification"},{id:"profileInstitution",label:"Institution"},{id:"profileFieldOfStudy",label:"Field of Study"},{id:"profileNqfLevel",label:"NQF Level"},{id:"profileMajorSubjects",label:"Major Subjects"},{id:"profileEducationAchievements",label:"Achievements"}])}
+${cvSection("Matric Information",[{id:"profileHighSchool",label:"High School"},{id:"profileMatricYear",label:"Year Completed"},{id:"profileMatricResults",label:"Results"}])}
+${cvSection("Work Experience",[{id:"profileCompany",label:"Company"},{id:"profileJobTitle",label:"Job Title"},{id:"profileWorkType",label:"Employment Type"},{id:"profileResponsibilities",label:"Responsibilities"},{id:"profileWorkAchievements",label:"Achievements"}])}
+${cvSection("Skills",[{id:"profileTechnicalSkills",label:"Technical Skills"},{id:"profileComputerSkills",label:"Computer Skills"},{id:"profileSoftSkills",label:"Soft Skills"},{id:"profileLanguages",label:"Languages"}])}
+${cvSection("Certifications and Projects",[{id:"profileCertificate",label:"Certificate"},{id:"profileTrainingProvider",label:"Training Provider"},{id:"profileProject",label:"Project"},{id:"profileProjectDescription",label:"Project Description"},{id:"profileProjectLink",label:"Project Link"}])}
+${cvSection("References",[{id:"profileReferenceName",label:"Name"},{id:"profileReferenceCompany",label:"Company"},{id:"profileReferenceTitle",label:"Job Title"},{id:"profileReferencePhone",label:"Phone"},{id:"profileReferenceEmail",label:"Email"}])}
+${cvSection("Online Profiles",[{id:"profileLinkedin",label:"LinkedIn"},{id:"profileGithub",label:"GitHub"},{id:"profilePortfolio",label:"Portfolio"}])}
+</body></html>`;
+
+}
+
+
+function previewCV(){
+
+let cvWindow=window.open("","_blank");
+if(!cvWindow){alert("Please allow pop-ups to preview your CV.");return;}
+cvWindow.document.write(buildCVDocument({...profileValues(),profileEmail:document.getElementById("profileEmail").value}));
+cvWindow.document.close();
+
+}
+
+
+function printCV(){
+
+let cvWindow=window.open("","_blank");
+if(!cvWindow){alert("Please allow pop-ups to print your CV.");return;}
+cvWindow.document.write(buildCVDocument({...profileValues(),profileEmail:document.getElementById("profileEmail").value}));
+cvWindow.document.close();
+cvWindow.focus();
+cvWindow.print();
+
+}
+
+
+async function shareCV(){
+
+let profile = profileValues();
+let fullName=[profile.profileFirstName,profile.profileMiddleName,profile.profileSurname]
+.filter(Boolean)
+.join(" ");
+let shareText=`${fullName}\n${profile.profileTitle || ""}\n${profile.profileSummary || ""}`.trim();
+
+if(navigator.share){
+await navigator.share({
+title:`${fullName} - CV`,
+text:shareText
+});
+return;
+}
+
+await navigator.clipboard.writeText(shareText);
+alert("A short CV summary was copied to your clipboard.");
+
+}
+
+
 function downloadCV(){
 
 let profile = profileValues();
 
-if(!profile.name){
+if(!profile.profileFirstName || !profile.profileSurname){
 alert("Enter your full name before downloading your CV.");
 return;
 }
 
-let cvWindow = window.open("","_blank");
-
-if(!cvWindow){
-alert("Please allow pop-ups to download your CV.");
-return;
-}
-
-cvWindow.document.write(`
-<!doctype html>
-<html>
-<head>
-<title>${escapeHTML(profile.name)} - CV</title>
-<style>
-body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:0 24px;color:#222;line-height:1.5}
-h1{margin-bottom:4px;color:#102a43}
-h2{border-bottom:2px solid #102a43;padding-bottom:4px;margin-top:28px;color:#102a43}
-.contact{color:#555;margin-bottom:24px}
-@media print{body{margin:0}}
-</style>
-</head>
-<body>
-<h1>${escapeHTML(profile.name)}</h1>
-<div class="contact">${escapeHTML(profile.title)}<br>${escapeHTML(profile.location)} ${profile.phone ? "| " + escapeHTML(profile.phone) : ""}</div>
-${profile.summary ? `<h2>Professional Summary</h2><p>${escapeHTML(profile.summary).replaceAll("\\n","<br>")}</p>` : ""}
-${profile.skills ? `<h2>Skills</h2><p>${escapeHTML(profile.skills).replaceAll("\\n","<br>")}</p>` : ""}
-${profile.education ? `<h2>Education</h2><p>${escapeHTML(profile.education).replaceAll("\\n","<br>")}</p>` : ""}
-${profile.experience ? `<h2>Experience</h2><p>${escapeHTML(profile.experience).replaceAll("\\n","<br>")}</p>` : ""}
-</body>
-</html>
-`);
-
-cvWindow.document.close();
-cvWindow.focus();
-cvWindow.print();
+printCV();
 
 }
 
@@ -1462,6 +1586,25 @@ return String(value || "")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
+}
+
+
+function formatAuthError(error){
+
+if(error.code === "email_not_confirmed"){
+return "Please confirm your email address before logging in.";
+}
+
+if(error.code === "invalid_credentials"){
+return "The email or password is incorrect. Use Forgot password if needed.";
+}
+
+if(error.message?.toLowerCase().includes("rate limit")){
+return "Too many emails were requested. Wait a while before trying again, then check your spam folder.";
+}
+
+return error.message || "Authentication failed. Please try again.";
 
 }
 
@@ -1748,17 +1891,36 @@ document.getElementById("signupEmail")
 .value.trim()
 .toLowerCase();
 
+let password =
+document.getElementById("signupPassword")
+.value;
+
+if(password.length < 6){
+alert("Password must be at least 6 characters.");
+return;
+}
+
 let result =
 await supabaseClient.auth.signUp({
 email:email,
-password:document.getElementById("signupPassword").value,
+password:password,
 options:{
 data:{name:name}
 }
 });
 
 if(result.error){
-alert(result.error.message);
+alert(formatAuthError(result.error));
+return;
+}
+
+if(!result.data.user){
+alert("Your account could not be created. Please try again.");
+return;
+}
+
+if(result.data.user.identities && result.data.user.identities.length===0){
+alert("An account with this email already exists. Use Login or Forgot password.");
 return;
 }
 
@@ -1772,13 +1934,22 @@ applications:[]
 saveUsers();
 }
 
-alert(
-"Account created successfully."
-);
+if(result.data.session){
+alert("Account created successfully. You are now signed in.");
+}else{
+alert("Account created. Check your email and confirm your account before logging in.");
+}
 
 closeModals();
 
+if(result.data.session){
+currentUser=email;
+localStorage.setItem("careerBuildCurrentUser",email);
+updateNav();
+showDashboard();
+}else{
 openLogin();
+}
 
 });
 
@@ -1805,7 +1976,7 @@ password:document.getElementById("loginPassword").value
 });
 
 if(result.error){
-alert("Incorrect email or password.");
+alert(formatAuthError(result.error));
 return;
 }
 
