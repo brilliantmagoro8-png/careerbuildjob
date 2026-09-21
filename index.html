@@ -361,6 +361,7 @@ footer{
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -1447,7 +1448,100 @@ alert("Enter your full name before downloading your CV.");
 return;
 }
 
-printCV();
+if(!window.jspdf){
+alert("The PDF tool is still loading. Check your internet connection and try again.");
+return;
+}
+
+let fullName=[profile.profileFirstName,profile.profileMiddleName,profile.profileSurname]
+.filter(Boolean)
+.join(" ");
+
+let documentPdf = new window.jspdf.jsPDF();
+let y=20;
+let pageWidth=documentPdf.internal.pageSize.getWidth();
+
+function addText(text,size,bold){
+let lines=documentPdf.splitTextToSize(String(text || ""),pageWidth-30);
+documentPdf.setFontSize(size);
+documentPdf.setFont("helvetica",bold ? "bold" : "normal");
+
+lines.forEach(function(line){
+if(y>275){
+documentPdf.addPage();
+y=20;
+}
+documentPdf.text(line,15,y);
+y+=size>=16 ? 9 : 6;
+});
+}
+
+function addSection(title,fields){
+let values=fields
+.map(function(field){
+return profile[field.id] ? `${field.label}: ${profile[field.id]}` : "";
+})
+.filter(Boolean);
+
+if(!values.length) return;
+
+y+=5;
+addText(title,14,true);
+values.forEach(function(value){
+addText(value,10,false);
+});
+}
+
+addText(fullName,20,true);
+addText(profile.profileTitle,12,false);
+addText([profile.profileEmail,profile.profilePhone,profile.profileCity,profile.profileProvince].filter(Boolean).join(" | "),10,false);
+addSection("Professional Summary",[{id:"profileSummary",label:""}]);
+addSection("Employment Details",[
+{id:"profileEmploymentStatus",label:"Status"},
+{id:"profileExpectedSalary",label:"Expected Salary"},
+{id:"profileNoticePeriod",label:"Notice Period"}
+]);
+addSection("Education",[
+{id:"profileQualification",label:"Qualification"},
+{id:"profileInstitution",label:"Institution"},
+{id:"profileFieldOfStudy",label:"Field of Study"},
+{id:"profileNqfLevel",label:"NQF Level"},
+{id:"profileEducationAchievements",label:"Achievements"}
+]);
+addSection("Work Experience",[
+{id:"profileCompany",label:"Company"},
+{id:"profileJobTitle",label:"Job Title"},
+{id:"profileWorkType",label:"Employment Type"},
+{id:"profileResponsibilities",label:"Responsibilities"},
+{id:"profileWorkAchievements",label:"Achievements"}
+]);
+addSection("Skills",[
+{id:"profileTechnicalSkills",label:"Technical Skills"},
+{id:"profileComputerSkills",label:"Computer Skills"},
+{id:"profileSoftSkills",label:"Soft Skills"},
+{id:"profileLanguages",label:"Languages"}
+]);
+addSection("Certifications and Projects",[
+{id:"profileCertificate",label:"Certificate"},
+{id:"profileTrainingProvider",label:"Training Provider"},
+{id:"profileProject",label:"Project"},
+{id:"profileProjectDescription",label:"Project Description"},
+{id:"profileProjectLink",label:"Project Link"}
+]);
+addSection("References",[
+{id:"profileReferenceName",label:"Name"},
+{id:"profileReferenceCompany",label:"Company"},
+{id:"profileReferenceTitle",label:"Job Title"},
+{id:"profileReferencePhone",label:"Phone"},
+{id:"profileReferenceEmail",label:"Email"}
+]);
+addSection("Online Profiles",[
+{id:"profileLinkedin",label:"LinkedIn"},
+{id:"profileGithub",label:"GitHub"},
+{id:"profilePortfolio",label:"Portfolio"}
+]);
+
+documentPdf.save(`${fullName.replace(/[^a-z0-9]+/gi,"-")}-CV.pdf`);
 
 }
 
