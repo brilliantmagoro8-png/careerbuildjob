@@ -537,6 +537,121 @@ My Dashboard
 
 <div class="panel">
 
+<h2>My Profile and CV</h2>
+
+<br>
+
+<form id="profileForm">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Full Name</label>
+
+<input
+id="profileName"
+required
+placeholder="Your full name">
+
+</div>
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input
+id="profilePhone"
+placeholder="Your phone number">
+
+</div>
+
+<div class="form-group">
+
+<label>Location</label>
+
+<input
+id="profileLocation"
+placeholder="City, Province">
+
+</div>
+
+<div class="form-group">
+
+<label>Professional Title</label>
+
+<input
+id="profileTitle"
+placeholder="e.g. Junior Web Developer">
+
+</div>
+
+<div class="form-group full">
+
+<label>Professional Summary</label>
+
+<textarea
+id="profileSummary"
+placeholder="Briefly describe your experience and career goals"></textarea>
+
+</div>
+
+<div class="form-group full">
+
+<label>Skills</label>
+
+<textarea
+id="profileSkills"
+placeholder="e.g. HTML, customer service, Microsoft Office"></textarea>
+
+</div>
+
+<div class="form-group full">
+
+<label>Education</label>
+
+<textarea
+id="profileEducation"
+placeholder="Qualifications, institutions, and years"></textarea>
+
+</div>
+
+<div class="form-group full">
+
+<label>Experience</label>
+
+<textarea
+id="profileExperience"
+placeholder="Roles, employers, responsibilities, and dates"></textarea>
+
+</div>
+
+</div>
+
+<button
+type="submit"
+class="btn blue">
+
+Save Profile
+
+</button>
+
+<button
+type="button"
+class="btn"
+onclick="downloadCV()">
+
+Download CV
+
+</button>
+
+</form>
+
+</div>
+
+
+<div class="panel">
+
 <h2> Saved Jobs</h2>
 
 <br>
@@ -1064,6 +1179,155 @@ JSON.stringify(users)
 }
 
 
+async function getCurrentAuthUser(){
+
+let result =
+await supabaseClient.auth.getUser();
+
+return result.data.user;
+
+}
+
+
+async function loadProfile(){
+
+if(!currentUser || isAdmin) return;
+
+let user = await getCurrentAuthUser();
+
+if(!user) return;
+
+let result =
+await supabaseClient
+.from("profiles")
+.select("*")
+.eq("user_id",user.id)
+.maybeSingle();
+
+if(result.error){
+console.error(result.error);
+return;
+}
+
+let profile = result.data || {
+name:user.user_metadata?.name || "",
+email:user.email || ""
+};
+
+document.getElementById("profileName").value=profile.name || "";
+document.getElementById("profilePhone").value=profile.phone || "";
+document.getElementById("profileLocation").value=profile.location || "";
+document.getElementById("profileTitle").value=profile.title || "";
+document.getElementById("profileSummary").value=profile.summary || "";
+document.getElementById("profileSkills").value=profile.skills || "";
+document.getElementById("profileEducation").value=profile.education || "";
+document.getElementById("profileExperience").value=profile.experience || "";
+
+}
+
+
+function profileValues(){
+
+return {
+name:document.getElementById("profileName").value.trim(),
+phone:document.getElementById("profilePhone").value.trim(),
+location:document.getElementById("profileLocation").value.trim(),
+title:document.getElementById("profileTitle").value.trim(),
+summary:document.getElementById("profileSummary").value.trim(),
+skills:document.getElementById("profileSkills").value.trim(),
+education:document.getElementById("profileEducation").value.trim(),
+experience:document.getElementById("profileExperience").value.trim()
+};
+
+}
+
+
+document.getElementById("profileForm")
+.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+if(!currentUser || isAdmin){
+alert("Please sign in with a job seeker account first.");
+return;
+}
+
+let user = await getCurrentAuthUser();
+
+if(!user){
+alert("Your session has expired. Please log in again.");
+return;
+}
+
+let profile = profileValues();
+
+let result =
+await supabaseClient
+.from("profiles")
+.upsert({
+user_id:user.id,
+email:user.email,
+...profile,
+updated_at:new Date().toISOString()
+},{onConflict:"user_id"});
+
+if(result.error){
+alert("Your profile could not be saved. Please check the Supabase profile setup.");
+return;
+}
+
+alert("Profile saved successfully.");
+
+});
+
+
+function downloadCV(){
+
+let profile = profileValues();
+
+if(!profile.name){
+alert("Enter your full name before downloading your CV.");
+return;
+}
+
+let cvWindow = window.open("","_blank");
+
+if(!cvWindow){
+alert("Please allow pop-ups to download your CV.");
+return;
+}
+
+cvWindow.document.write(`
+<!doctype html>
+<html>
+<head>
+<title>${escapeHTML(profile.name)} - CV</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:0 24px;color:#222;line-height:1.5}
+h1{margin-bottom:4px;color:#102a43}
+h2{border-bottom:2px solid #102a43;padding-bottom:4px;margin-top:28px;color:#102a43}
+.contact{color:#555;margin-bottom:24px}
+@media print{body{margin:0}}
+</style>
+</head>
+<body>
+<h1>${escapeHTML(profile.name)}</h1>
+<div class="contact">${escapeHTML(profile.title)}<br>${escapeHTML(profile.location)} ${profile.phone ? "| " + escapeHTML(profile.phone) : ""}</div>
+${profile.summary ? `<h2>Professional Summary</h2><p>${escapeHTML(profile.summary).replaceAll("\\n","<br>")}</p>` : ""}
+${profile.skills ? `<h2>Skills</h2><p>${escapeHTML(profile.skills).replaceAll("\\n","<br>")}</p>` : ""}
+${profile.education ? `<h2>Education</h2><p>${escapeHTML(profile.education).replaceAll("\\n","<br>")}</p>` : ""}
+${profile.experience ? `<h2>Experience</h2><p>${escapeHTML(profile.experience).replaceAll("\\n","<br>")}</p>` : ""}
+</body>
+</html>
+`);
+
+cvWindow.document.close();
+cvWindow.focus();
+cvWindow.print();
+
+}
+
+
 /* =====================================
    NAVIGATION
    ===================================== */
@@ -1122,6 +1386,7 @@ document.getElementById("dashboardSection")
 .style.display="block";
 
 updateDashboard();
+loadProfile();
 
 }
 
